@@ -1,3 +1,36 @@
 <resources>
-    <string name="app_name">ProjectGenerator</string>
+    <string name="app_name">Emoting</string>
+
+    <!--Landing Screen-->
+    <string name="sign_up_to_email">이메일 회원가입</string>
+    <string name="sign_in_to_email">이메일 로그인</string>
+
+    <!--Sign In Screen-->
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="sign_in">로그인</string>
+
+    <!--Input Email Screen-->
+    <string name="sign_up">회원가입</string>
+    <string name="next">다음</string>
+    <string name="enter_email">이메일을 입력해주세요</string>
+    <string name="description_email">이메일 형식이 올바르지 않아요</string>
+
+    <!--Input Password Screen-->
+    <string name="enter_password">비밀번호를 입력해주세요</string>
+    <string name="re_enter_password">비밀번호 재입력</string>
+    <string name="description_password">비밀번호는 6자~18자리 사이로 적어주세요</string>
+    <string name="description_re_enter_password">비밀번호가 일치하지 않아요</string>
+
+    <!--Set Nickname Screen-->
+    <string name="enter_nickname">닉네임을 입력해주세요</string>
+    <string name="nickname">닉네임(별명)</string>
+
+    <!--Input Age Screen-->
+    <string name="enter_age">나이를 입력해주세요</string>
+    <string name="age">나이</string>
+
+    <!--Set Profile Screen-->
+    <string name="set_profile">프로필을 등록해주세요</string>
+    <string name="later">나중에 하기</string>
 </resources>
