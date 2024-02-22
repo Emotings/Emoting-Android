@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowCompat
+import com.emoting.android.navigation.EmotingApp
 import com.emoting.designsystem.ui.theme.EmotingAndroidTheme
 
 class MainActivity : ComponentActivity() {
