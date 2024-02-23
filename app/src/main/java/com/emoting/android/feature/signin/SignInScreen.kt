@@ -19,7 +19,7 @@ import com.emoting.designsystem.ui.button.EmotingButton
 import com.emoting.designsystem.ui.textfield.EmotingTextField
 
 @Composable
-internal fun SignInScreen() {
+internal fun SignInScreen(onSignInClick: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
         Spacer(modifier = Modifier.height(40.dp))
         Image(
@@ -39,7 +39,7 @@ internal fun SignInScreen() {
             modifier = Modifier.imePadding(),
             text = stringResource(id = R.string.sign_in),
             color = ButtonColor.Primary,
-            onClick = {},
+            onClick = onSignInClick,
         )
     }
 }

@@ -1,14 +1,17 @@
 package com.emoting.android.ui
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Divider
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,9 +33,11 @@ val menus = listOf(
 internal fun BottomNavigationBar(navController: NavController) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
     Column {
-        HorizontalDivider(
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(EmotingColors.Gray300),
             thickness = 1.dp,
-            color = EmotingColors.Gray300,
         )
         BottomAppBar(containerColor = EmotingColors.White) {
             menus.forEach {
@@ -61,6 +66,7 @@ internal fun BottomNavigationBar(navController: NavController) {
                             tint = tint,
                         )
                     },
+                    colors = NavigationBarItemDefaults.colors(indicatorColor = EmotingColors.Gray100),
                 )
             }
         }

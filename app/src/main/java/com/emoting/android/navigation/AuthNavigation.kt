@@ -22,6 +22,7 @@ internal fun NavGraphBuilder.authNavigation(
     navigateToSetNickname: () -> Unit,
     navigateToInputAge: () -> Unit,
     navigateToSetProfile: () -> Unit,
+    navigateToRoot: () -> Unit,
 ) {
     navigation(
         startDestination = NavigationRoute.Auth.SPLASH,
@@ -37,7 +38,7 @@ internal fun NavGraphBuilder.authNavigation(
             )
         }
         composable(NavigationRoute.Auth.SIGN_IN) {
-            SignInScreen()
+            SignInScreen(onSignInClick = navigateToRoot)
         }
         composable(NavigationRoute.Auth.INPUT_EMAIL) {
             InputEmailScreen(

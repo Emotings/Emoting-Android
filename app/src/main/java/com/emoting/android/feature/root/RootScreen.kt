@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.emoting.android.feature.chat.ChatsScreen
 import com.emoting.android.navigation.BottomMenu
 import com.emoting.android.ui.BottomNavigationBar
 
@@ -21,7 +22,7 @@ fun RootScreen() {
             startDestination = BottomMenu.Chat.route,
         ) {
             composable(BottomMenu.Chat.route) {
-
+                ChatsScreen()
             }
             composable(BottomMenu.Friends.route) {
 
