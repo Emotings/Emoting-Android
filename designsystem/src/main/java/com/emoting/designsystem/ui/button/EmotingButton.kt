@@ -17,6 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.emoting.designsystem.ui.theme.EmotingTypography
 import com.emoting.designsystem.utils.clickable
@@ -25,23 +27,24 @@ import com.emoting.designsystem.utils.clickable
 private fun BasicButton(
     modifier: Modifier,
     text: String,
+    shape: RoundedCornerShape,
     enabled: Boolean,
     outlineColor: Color,
     backgroundColor: Color,
     textColor: Color,
+    style: TextStyle,
     interactionSource: MutableInteractionSource,
     onClick: () -> Unit,
 ) {
     Box(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(horizontal = 20.dp)
+            .padding(20.dp)
             .clickable(
                 interactionSource = interactionSource,
                 onClick = onClick,
                 enabled = enabled,
             )
-            .clip(RoundedCornerShape(12.dp))
+            .clip(shape)
             .border(
                 width = 1.dp,
                 color = outlineColor,
@@ -56,8 +59,9 @@ private fun BasicButton(
     ) {
         Text(
             text = text,
-            style = EmotingTypography.TextLarge,
+            style = style,
             color = textColor,
+            fontWeight = FontWeight.SemiBold,
         )
     }
 }
@@ -67,7 +71,9 @@ private fun ColoredButton(
     modifier: Modifier,
     text: String,
     color: ButtonColor,
+    shape: RoundedCornerShape,
     enabled: Boolean,
+    style: TextStyle,
     onClick: () -> Unit,
 ) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -95,9 +101,11 @@ private fun ColoredButton(
         modifier = modifier,
         text = text,
         enabled = enabled,
+        shape = shape,
         outlineColor = outlineColor,
         backgroundColor = backgroundColor,
         textColor = textColor,
+        style = style,
         interactionSource = interactionSource,
         onClick = onClick,
     )
@@ -112,10 +120,31 @@ fun EmotingButton(
     onClick: () -> Unit,
 ) {
     ColoredButton(
+        modifier = modifier.fillMaxWidth(),
+        text = text,
+        color = color,
+        enabled = enabled,
+        shape = RoundedCornerShape(12.dp),
+        style = EmotingTypography.TextLarge,
+        onClick = onClick,
+    )
+}
+
+@Composable
+fun EmotingFloatingButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    color: ButtonColor,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+) {
+    ColoredButton(
         modifier = modifier,
         text = text,
         color = color,
         enabled = enabled,
+        shape = RoundedCornerShape(20.dp),
+        style = EmotingTypography.TextMedium,
         onClick = onClick,
     )
 }
