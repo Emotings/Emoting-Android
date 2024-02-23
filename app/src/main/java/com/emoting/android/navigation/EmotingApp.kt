@@ -1,29 +1,21 @@
 package com.emoting.android.navigation
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navigation
 import com.emoting.android.NavigationRoute
-import com.emoting.android.feature.landing.LandingScreen
-import com.emoting.android.feature.signin.SignInScreen
-import com.emoting.android.feature.signup.inputage.InputAgeScreen
-import com.emoting.android.feature.signup.inputemail.InputEmailScreen
-import com.emoting.android.feature.signup.inputnickname.InputNicknameScreen
-import com.emoting.android.feature.signup.inputpassword.InputPasswordScreen
-import com.emoting.android.feature.signup.setprofile.SetProfileScreen
-import com.emoting.android.feature.splash.SplashScreen
+import com.emoting.designsystem.ui.theme.EmotingColors
 
 @Composable
 internal fun EmotingApp() {
     val navController = rememberNavController()
     NavHost(
         modifier = Modifier
+            .background(EmotingColors.White)
             .statusBarsPadding()
             .navigationBarsPadding(),
         navController = navController,
@@ -38,6 +30,14 @@ internal fun EmotingApp() {
             navigateToSetNickname = { navController.navigate(NavigationRoute.Auth.INPUT_NICKNAME) },
             navigateToInputAge = { navController.navigate(NavigationRoute.Auth.INPUT_AGE) },
             navigateToSetProfile = { navController.navigate(NavigationRoute.Auth.SET_PROFILE) },
+            navigateToRoot = {
+                navController.navigate(NavigationRoute.Main.ROOT) {
+                    popUpTo(NavigationRoute.Auth.SIGN_IN)
+                }
+            },
+        )
+        mainNavigation(
+            onBackPressed = navController::popBackStack,
         )
     }
 }
