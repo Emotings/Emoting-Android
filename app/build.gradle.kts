@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.com.google.android.material)
+    implementation(libs.io.coil.compose)
 
     testApi(libs.junit)
     androidTestApi(libs.androidx.junit)
