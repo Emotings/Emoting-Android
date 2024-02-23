@@ -39,4 +39,7 @@
     <string name="random_chatting">랜덤 채팅</string>
     <string name="not_read_message">읽지 않은 메시지가 있음</string>
     <string name="read_all_message">모든 메시지를 읽음</string>
+
+    <!--Loading Screen-->
+    <string name="loading">대화 할 때 마실 커피를 끓이고 있어요..</string>
 </resources>
