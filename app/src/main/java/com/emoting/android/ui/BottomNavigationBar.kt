@@ -4,6 +4,7 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
@@ -36,8 +37,8 @@ internal fun BottomNavigationBar(navController: NavController) {
         Divider(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(EmotingColors.Gray300),
-            thickness = 1.dp,
+                .height(1.dp)
+                .background(EmotingColors.Gray50),
         )
         BottomAppBar(containerColor = EmotingColors.White) {
             menus.forEach {
