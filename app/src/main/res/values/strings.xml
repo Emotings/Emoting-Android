@@ -42,4 +42,7 @@
 
     <!--Loading Screen-->
     <string name="loading">대화 할 때 마실 커피를 끓이고 있어요..</string>
+
+    <!--Chatting Screen-->
+    <string name="select_emoji">이모지를 골라주세요.</string>
 </resources>
