@@ -45,4 +45,9 @@
 
     <!--Chatting Screen-->
     <string name="select_emoji">이모지를 골라주세요.</string>
+
+    <!--Friends Screen-->
+    <string name="friends">친구 목록</string>
+    <string name="notification_on">알람 on</string>
+    <string name="notification_off">알림 off</string>
 </resources>
