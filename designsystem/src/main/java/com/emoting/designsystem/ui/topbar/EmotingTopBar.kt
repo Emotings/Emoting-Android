@@ -3,6 +3,7 @@ package com.emoting.designsystem.ui.topbar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -19,6 +20,7 @@ import com.emoting.designsystem.ui.theme.EmotingTypography
 fun EmotingTopBar(
     onBackPressed: (() -> Unit)? = null,
     title: String,
+    actions: (@Composable RowScope.() -> Unit)? = null,
 ) {
     Box(
         modifier = Modifier
@@ -40,6 +42,7 @@ fun EmotingTopBar(
                     onClick = onBackPressed,
                     painter = painterResource(id = R.drawable.ic_back),
                 )
+                actions?.invoke(this)
             }
         }
     }

@@ -22,6 +22,7 @@ sealed class NavigationRoute(val route: String) {
         val SEARCH_FRIEND = this.route + "/searchFriend"
         val EMOJI_REGISTRATION = this.route + "emojiRegistration"
         val ROOT = this.route + "/root"
+        val CHATTING = this.route + "/chatting"
     }
 
     data object Root : NavigationRoute(route = "/root") {
