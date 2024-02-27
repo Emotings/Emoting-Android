@@ -10,3 +10,7 @@ apply<ComposeGradlePlugin>()
 android {
     namespace = "com.emoting.android.design_system"
 }
+
+dependencies {
+    api(libs.io.coil.compose)
+}
