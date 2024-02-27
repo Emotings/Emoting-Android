@@ -2,15 +2,20 @@ package com.emoting.designsystem.ui.textfield
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
@@ -21,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -33,7 +40,62 @@ import com.emoting.designsystem.ui.theme.EmotingColors
 import com.emoting.designsystem.ui.theme.EmotingTypography
 
 @Composable
-private fun EmotingBasicTextField(
+fun EmotingBoxTextField(
+    modifier: Modifier = Modifier,
+    value: String,
+    hint: String,
+    title: String? = null,
+    enabled: Boolean = true,
+    singleLine: Boolean = false,
+    background: Color = EmotingColors.Gray50,
+    onValueChange: (String) -> Unit,
+    actions: (@Composable RowScope.() -> Unit)? = null,
+) {
+    val hintVisible by animateFloatAsState(
+        targetValue = if (value.isEmpty()) 1f
+        else 0f,
+        label = "",
+    )
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        title?.let {
+            Text(
+                text = it,
+                color = EmotingColors.Black,
+                style = EmotingTypography.TextMedium,
+            )
+        }
+        BasicTextField(
+            modifier = modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .background(background)
+                .padding(16.dp),
+            value = value,
+            onValueChange = onValueChange,
+            singleLine = singleLine,
+            enabled = enabled,
+        ) { innerTextField ->
+            Box {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
+                    innerTextField()
+                    actions?.invoke(this)
+                }
+                Text(
+                    modifier = Modifier.alpha(hintVisible),
+                    text = hint,
+                    style = EmotingTypography.TextMedium,
+                    color = EmotingColors.Gray300,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun EmotingBasicUnderLineTextField(
     modifier: Modifier,
     value: String,
     hint: String,
@@ -143,7 +205,7 @@ private fun ColoredTextField(
         label = "",
     )
 
-    EmotingBasicTextField(
+    EmotingBasicUnderLineTextField(
         modifier = modifier,
         value = value,
         hint = hint,
