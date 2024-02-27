@@ -1,7 +1,7 @@
 package com.emoting.android
 
 object NavigationArguments {
-
+    const val CHAT_ID = "chatId"
 }
 
 sealed class NavigationRoute(val route: String) {
@@ -23,6 +23,7 @@ sealed class NavigationRoute(val route: String) {
         val EMOJI_REGISTRATION = this.route + "emojiRegistration"
         val ROOT = this.route + "/root"
         val CHATTING = this.route + "/chatting"
+        val CHATTING_SEARCH = "$CHATTING/search"
     }
 
     data object Root : NavigationRoute(route = "/root") {

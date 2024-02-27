@@ -13,7 +13,7 @@ import com.emoting.android.navigation.BottomMenu
 import com.emoting.android.ui.BottomNavigationBar
 
 @Composable
-fun RootScreen() {
+fun RootScreen(navigateToChatting: (Long) -> Unit) {
     val navController = rememberNavController()
 
     Scaffold(bottomBar = { BottomNavigationBar(navController = navController) }) {
@@ -23,7 +23,7 @@ fun RootScreen() {
             startDestination = BottomMenu.Chat.route,
         ) {
             composable(BottomMenu.Chat.route) {
-                ChatsScreen()
+                ChatsScreen(navigateToChatting = navigateToChatting)
             }
             composable(BottomMenu.Friends.route) {
                 FriendsScreen()

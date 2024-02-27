@@ -27,16 +27,20 @@ import com.emoting.designsystem.ui.theme.EmotingColors
 import com.emoting.designsystem.ui.theme.EmotingTypography
 
 private data class Chat(
+    val chatId: Long,
     val profile: String,
     val name: String,
     val hasNewMessage: Boolean,
 )
 
 @Composable
-internal fun ChatsScreen() {
+internal fun ChatsScreen(
+    navigateToChatting: (Long) -> Unit,
+) {
     val chats = remember { mutableStateListOf<Chat>() }
     chats.add(
         Chat(
+            chatId = 1,
             profile = "",
             name = "홍길동",
             hasNewMessage = false,
@@ -44,6 +48,7 @@ internal fun ChatsScreen() {
     )
     chats.add(
         Chat(
+            chatId = 2,
             profile = "",
             name = "홍길동",
             hasNewMessage = true,
@@ -65,6 +70,7 @@ internal fun ChatsScreen() {
             Spacer(modifier = Modifier.height(20.dp))
             Chats(
                 chats = chats,
+                navigateToChatting = navigateToChatting,
             )
         }
         EmotingFloatingButton(
@@ -79,6 +85,7 @@ internal fun ChatsScreen() {
 @Composable
 private fun Chats(
     chats: SnapshotStateList<Chat>,
+    navigateToChatting: (Long) -> Unit,
 ) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(28.dp)) {
         items(chats) {
@@ -88,6 +95,7 @@ private fun Chats(
                 boolean = it.hasNewMessage,
                 trueMessage = stringResource(id = R.string.not_read_message),
                 falseMessage = stringResource(id = R.string.read_all_message),
+                onClick = { navigateToChatting(it.chatId) },
             )
         }
     }
