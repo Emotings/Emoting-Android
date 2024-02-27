@@ -62,6 +62,9 @@ dependencies {
     implementation(libs.com.google.android.material)
     implementation(libs.io.coil.compose)
 
+    api(libs.com.squareup.retrofit2)
+    api(libs.com.squareup.retrofit2.converter.gson)
+
     testApi(libs.junit)
     androidTestApi(libs.androidx.junit)
     androidTestApi(libs.androidx.espresso.core)
