@@ -75,10 +75,11 @@ fun EmotingBoxTextField(
             singleLine = singleLine,
             enabled = enabled,
         ) { innerTextField ->
-            Box {
+            Box(contentAlignment = Alignment.CenterStart) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     innerTextField()
                     actions?.invoke(this)

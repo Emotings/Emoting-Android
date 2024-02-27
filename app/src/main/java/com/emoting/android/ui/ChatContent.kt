@@ -26,12 +26,13 @@ fun ChatContent(
     boolean: Boolean,
     trueMessage: String,
     falseMessage: String,
+    onClick: () -> Unit,
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(
-                onClick = {},
+                onClick = onClick,
                 pressDepth = 0.98f,
             ),
         horizontalArrangement = Arrangement.spacedBy(8.dp),

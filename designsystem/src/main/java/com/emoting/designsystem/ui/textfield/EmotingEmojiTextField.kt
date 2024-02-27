@@ -26,6 +26,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.emoting.designsystem.ui.theme.EmotingColors
@@ -36,21 +37,22 @@ import kotlinx.coroutines.delay
 @Composable
 fun EmotingEmojiTextField(
     modifier: Modifier = Modifier,
-    emojis: SnapshotStateList<String>,
+    value: SnapshotStateList<String>,
     hint: String,
     onClick: () -> Unit,
     hasFocus: Boolean = false,
     shape: Shape = RoundedCornerShape(20.dp),
+    verticalPadding: Dp = 10.dp,
     background: Color = EmotingColors.Gray100,
     actions: (@Composable RowScope.() -> Unit)? = null,
 ) {
     val hintVisible by animateFloatAsState(
-        targetValue = if (emojis.isEmpty()) 1f
+        targetValue = if (value.isEmpty()) 1f
         else 0f,
         label = "",
     )
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clip(shape)
             .background(background)
@@ -61,7 +63,7 @@ fun EmotingEmojiTextField(
             )
             .padding(
                 horizontal = 20.dp,
-                vertical = 10.dp,
+                vertical = verticalPadding,
             ),
     ) {
         Box(contentAlignment = Alignment.CenterStart) {
@@ -77,7 +79,7 @@ fun EmotingEmojiTextField(
                     horizontalArrangement = Arrangement.spacedBy(2.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    emojis.forEach {
+                    value.forEach {
                         AsyncImage(
                             modifier = Modifier.size(24.dp),
                             model = it,
@@ -113,8 +115,8 @@ private fun Cursor(showCursor: Boolean) {
         Box(
             modifier = Modifier
                 .size(
-                    width = 1.dp,
-                    height = 20.dp,
+                    width = 2.dp,
+                    height = 18.dp,
                 )
                 .background(EmotingColors.Black),
         )

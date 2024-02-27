@@ -50,4 +50,7 @@
     <string name="friends">친구 목록</string>
     <string name="notification_on">알람 on</string>
     <string name="notification_off">알림 off</string>
+
+    <!--Search Chatting-->
+    <string name="hint_search_chatting">채팅 내용을 검색해보세요</string>
 </resources>
