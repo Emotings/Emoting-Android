@@ -32,6 +32,7 @@ import com.emoting.designsystem.utils.clickable
 @Composable
 internal fun FriendRequestsScreen(
     onBackPressed: () -> Unit,
+    navigateToSearchFriend: () -> Unit,
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -68,7 +69,7 @@ internal fun FriendRequestsScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .clickable { }
+                .clickable(onClick = navigateToSearchFriend)
                 .padding(20.dp)
                 .shadow(
                     elevation = 1.dp,
