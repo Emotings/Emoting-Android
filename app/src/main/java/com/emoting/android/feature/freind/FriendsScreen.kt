@@ -40,7 +40,9 @@ private data class Friend(
 )
 
 @Composable
-internal fun FriendsScreen() {
+internal fun FriendsScreen(
+    navigateToFriendRequests: () -> Unit,
+) {
     val friends = remember {
         mutableStateListOf(
             Friend(
@@ -74,7 +76,7 @@ internal fun FriendsScreen() {
                     style = EmotingTypography.TitleSmall,
                 )
                 EmotingIconButton(
-                    onClick = {},
+                    onClick = navigateToFriendRequests,
                     painter = painterResource(id = R.drawable.ic_notification),
                     tint = EmotingColors.Gray300,
                 )
