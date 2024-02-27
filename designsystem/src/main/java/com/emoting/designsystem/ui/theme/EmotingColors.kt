@@ -24,7 +24,7 @@ object EmotingColors {
     val Error800 = Color(0xFF791519)
     val Error900 = Color(0xFF520F11)
 
-    val Gray50 = Color(0xFFF2F2F2)
+    val Gray50 = Color(0xFFF6F6F6)
     val Gray100 = Color(0xFFE8E8E8)
     val Gray200 = Color(0xFFD1D1D1)
     val Gray300 = Color(0xFFBABABA)
