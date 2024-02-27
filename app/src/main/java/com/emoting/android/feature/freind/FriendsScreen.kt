@@ -117,6 +117,7 @@ private fun Friends(
                 boolean = it.notification,
                 trueMessage = stringResource(id = R.string.notification_on),
                 falseMessage = stringResource(id = R.string.notification_off),
+                onClick = {},
             )
         }
     }

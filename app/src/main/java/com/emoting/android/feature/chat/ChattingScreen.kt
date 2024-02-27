@@ -36,6 +36,8 @@ import com.emoting.designsystem.utils.clickable
 @Composable
 internal fun ChattingScreen(
     onBackPressed: () -> Unit,
+    navigateToSearchChatting: (Long) -> Unit,
+    chatId: Long,
 ) {
     Column(
         modifier = Modifier
@@ -47,7 +49,7 @@ internal fun ChattingScreen(
             onBackPressed = onBackPressed,
         ) {
             EmotingIconButton(
-                onClick = {},
+                onClick = { navigateToSearchChatting(chatId) },
                 painter = painterResource(id = R.drawable.ic_search),
             )
         }
