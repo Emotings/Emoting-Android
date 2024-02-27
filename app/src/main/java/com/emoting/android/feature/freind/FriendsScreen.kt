@@ -42,6 +42,7 @@ private data class Friend(
 @Composable
 internal fun FriendsScreen(
     navigateToFriendRequests: () -> Unit,
+    navigateToSearchFriend: () -> Unit,
 ) {
     val friends = remember {
         mutableStateListOf(
@@ -87,7 +88,7 @@ internal fun FriendsScreen(
         Box(
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .clickable { }
+                .clickable(onClick = navigateToSearchFriend)
                 .padding(20.dp)
                 .shadow(
                     elevation = 1.dp,

@@ -17,16 +17,14 @@ internal fun NavGraphBuilder.mainNavigation(
     onBackPressed: () -> Unit,
     navigateToChatting: (Long) -> Unit,
     navigateToSearchChatting: (Long) -> Unit,
-    navigateToFriendRequests: () -> Unit,
 ) {
     navigation(
         route = NavigationRoute.Main.route,
-        startDestination = NavigationRoute.Main.FRIEND_REQUESTS,
+        startDestination = NavigationRoute.Root.FRIEND_REQUESTS,
     ) {
         composable(NavigationRoute.Main.ROOT) {
             RootScreen(
                 navigateToChatting = navigateToChatting,
-                navigateToFriendRequests = navigateToFriendRequests,
             )
         }
         composable(NavigationRoute.Main.LOADING) {
@@ -46,9 +44,6 @@ internal fun NavGraphBuilder.mainNavigation(
         }
         composable(NavigationRoute.Main.CHATTING_SEARCH) {
             SearchChattingScreen()
-        }
-        composable(NavigationRoute.Main.FRIEND_REQUESTS){
-            FriendRequestsScreen(onBackPressed = onBackPressed)
         }
     }
 }
