@@ -53,4 +53,8 @@
 
     <!--Search Chatting-->
     <string name="hint_search_chatting">채팅 내용을 검색해보세요</string>
+
+    <!--Friend Requests-->
+    <string name="back">돌아가기</string>
+    <string name="friend_requests">받은 친구 신청</string>
 </resources>

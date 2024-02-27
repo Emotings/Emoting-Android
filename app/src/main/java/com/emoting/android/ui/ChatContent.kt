@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -21,19 +22,23 @@ import com.emoting.designsystem.utils.clickable
 
 @Composable
 fun ChatContent(
+    modifier: Modifier = Modifier,
     profile: String,
     name: String,
     boolean: Boolean,
     trueMessage: String,
     falseMessage: String,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
+    actions: (@Composable RowScope.() -> Unit)? = null,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .clickable(
-                onClick = onClick,
-                pressDepth = 0.98f,
+            .then(
+                if (onClick != null) Modifier.clickable(
+                    onClick = { onClick?.invoke() },
+                    pressDepth = 0.98f,
+                ) else Modifier,
             ),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -45,7 +50,10 @@ fun ChatContent(
             model = profile,
             contentDescription = "chat profile",
         )
-        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Column(
+            modifier = Modifier.weight(1f),
+            verticalArrangement = Arrangement.spacedBy(2.dp),
+        ) {
             Text(
                 text = name,
                 style = EmotingTypography.TextMedium,
@@ -72,5 +80,6 @@ fun ChatContent(
                 )
             }
         }
+        actions?.invoke(this)
     }
 }
