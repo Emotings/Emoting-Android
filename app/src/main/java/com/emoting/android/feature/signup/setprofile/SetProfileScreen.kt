@@ -16,17 +16,17 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.emoting.android.R
 import com.emoting.designsystem.ui.button.ButtonColor
 import com.emoting.designsystem.ui.button.EmotingButton
@@ -39,11 +39,12 @@ import com.emoting.designsystem.utils.clickable
 internal fun SetProfileScreen(
     onBackPressed: () -> Unit,
     onNextClick: () -> Unit,
+    viewModel: SetProfileViewModel = viewModel(),
 ) {
-    var uri: Uri? by remember { mutableStateOf(null) }
+    val state by viewModel.state.collectAsState()
     val activityResultLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri = it },
+        onResult = viewModel::setUri,
     )
 
     Column(
@@ -63,7 +64,7 @@ internal fun SetProfileScreen(
             style = EmotingTypography.TitleMedium,
         )
         ProfileImage(
-            uri = uri,
+            uri = state.profileImageUri,
             onClick = {
                 val mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
                 val request = PickVisualMediaRequest(mediaType)
@@ -80,7 +81,8 @@ internal fun SetProfileScreen(
         EmotingButton(
             text = stringResource(id = R.string.next),
             color = ButtonColor.Primary,
-            onClick = onNextClick,
+            onClick = viewModel::onNextClick,
+            enabled = state.buttonEnabled,
         )
     }
 }
@@ -105,6 +107,11 @@ private fun ProfileImage(
                 )
             } else {
                 // TODO AsyncImage 사용하기
+                AsyncImage(
+                    model = uri,
+                    contentDescription = "profile",
+                    contentScale = ContentScale.Crop,
+                )
             }
         }
         if (uri == null) {
@@ -119,13 +126,5 @@ private fun ProfileImage(
                 tint = EmotingColors.Gray500,
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun PreviewSetProfileScreen() {
-    SetProfileScreen(onBackPressed = { /*TODO*/ }) {
-
     }
 }
