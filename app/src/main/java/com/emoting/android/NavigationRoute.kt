@@ -2,6 +2,7 @@ package com.emoting.android
 
 object NavigationArguments {
     const val CHAT_ID = "chatId"
+    const val SIGN_UP = "signUp"
 }
 
 sealed class NavigationRoute(val route: String) {

@@ -2,6 +2,7 @@
 plugins {
     id(libs.plugins.android.application.get().pluginId)
     id(libs.plugins.kotlin.android.get().pluginId)
+    id(libs.plugins.kotlinx.serialization.get().pluginId)
 }
 
 android {
@@ -48,23 +49,26 @@ android {
 
 dependencies {
 
-    implementation(project(":designsystem"))
+    api(project(":designsystem"))
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.navigation)
-    implementation(libs.com.google.android.material)
-    implementation(libs.io.coil.compose)
+    api(libs.androidx.core.ktx)
+    api(libs.androidx.lifecycle.runtime.ktx)
+    api(libs.androidx.activity.compose)
+    api(platform(libs.androidx.compose.bom))
+    api(libs.androidx.compose.ui)
+    api(libs.androidx.compose.ui.graphics)
+    api(libs.androidx.compose.ui.tooling.preview)
+    api(libs.androidx.compose.material3)
+    api(libs.androidx.compose.navigation)
+    api(libs.com.google.android.material)
+    api(libs.io.coil.compose)
 
     api(libs.com.squareup.retrofit2)
     api(libs.com.squareup.retrofit2.converter.gson)
     api(libs.com.squareup.logging.interceptor)
+
+    api(libs.kotlin.stdlib)
+    api(libs.kotlinx.serialization.json)
 
     testApi(libs.junit)
     androidTestApi(libs.androidx.junit)

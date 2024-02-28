@@ -6,5 +6,5 @@ internal data class PostSignUpRequest(
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String,
     @SerializedName("nickname") val nickName: String,
-    @SerializedName("age") val age: Long,
+    @SerializedName("age") val age: Int,
 )

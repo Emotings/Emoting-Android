@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +32,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -104,13 +107,16 @@ private fun EmotingBasicUnderLineTextField(
     enabled: Boolean,
     isError: Boolean,
     showVisibleIcon: Boolean,
+    keyboardType: KeyboardType,
+    imeAction: ImeAction,
     description: String?,
     underLineColor: Color,
     hintColor: Color,
     singleLine: Boolean,
     onValueChange: (String) -> Unit,
+    content: (@Composable RowScope.() -> Unit)?,
 ) {
-    var visible by remember { mutableStateOf(false) }
+    var visible by remember { mutableStateOf(!showVisibleIcon) }
     val offsetY by animateDpAsState(
         targetValue = if (value.isNotEmpty()) (-30).dp
         else 0.dp,
@@ -136,12 +142,17 @@ private fun EmotingBasicUnderLineTextField(
                         innerTextField()
                     },
                     textStyle = EmotingTypography.TextMedium,
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = keyboardType,
+                        imeAction = imeAction,
+                    ),
                     enabled = enabled,
                     singleLine = singleLine,
                     visualTransformation = if (visible) VisualTransformation.None
                     else PasswordVisualTransformation(),
                 )
                 Spacer(modifier = Modifier.width(4.dp))
+                content?.invoke(this)
                 if (showVisibleIcon) {
                     EmotingIconButton(
                         onClick = { visible = !visible },
@@ -188,9 +199,12 @@ private fun ColoredTextField(
     enabled: Boolean,
     isError: Boolean,
     showVisibleIcon: Boolean,
+    keyboardType: KeyboardType,
+    imeAction: ImeAction,
     description: String?,
     singleLine: Boolean,
     onValueChange: (String) -> Unit,
+    content: (@Composable RowScope.() -> Unit)?,
 ) {
     var focused by remember { mutableStateOf(false) }
     val underLineColor by animateColorAsState(
@@ -214,11 +228,14 @@ private fun ColoredTextField(
         enabled = enabled,
         isError = isError,
         showVisibleIcon = showVisibleIcon,
+        keyboardType = keyboardType,
+        imeAction = imeAction,
         description = description,
         underLineColor = underLineColor,
         hintColor = hintColor,
         singleLine = singleLine,
         onValueChange = onValueChange,
+        content = content,
     )
 }
 
@@ -230,9 +247,12 @@ fun EmotingTextField(
     hint: String,
     isError: Boolean = false,
     showVisibleIcon: Boolean = false,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    imeAction: ImeAction = ImeAction.None,
     description: String? = null,
     enabled: Boolean = true,
     singleLine: Boolean = true,
+    content: (@Composable RowScope.() -> Unit)? = null,
 ) {
     ColoredTextField(
         modifier = modifier,
@@ -241,8 +261,11 @@ fun EmotingTextField(
         enabled = enabled,
         isError = isError,
         showVisibleIcon = showVisibleIcon,
+        keyboardType = keyboardType,
+        imeAction = imeAction,
         description = description,
         onValueChange = onValueChange,
         singleLine = singleLine,
+        content = content,
     )
 }
