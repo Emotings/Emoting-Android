@@ -8,7 +8,7 @@ import com.emoting.android.feature.landing.LandingScreen
 import com.emoting.android.feature.signin.SignInScreen
 import com.emoting.android.feature.signup.inputage.InputAgeScreen
 import com.emoting.android.feature.signup.inputemail.InputEmailScreen
-import com.emoting.android.feature.signup.inputnickname.InputNicknameScreen
+import com.emoting.android.feature.signup.inputnickname.InputNickNameScreen
 import com.emoting.android.feature.signup.inputpassword.InputPasswordScreen
 import com.emoting.android.feature.signup.setprofile.SetProfileScreen
 import com.emoting.android.feature.splash.SplashScreen
@@ -53,7 +53,7 @@ internal fun NavGraphBuilder.authNavigation(
             )
         }
         composable(NavigationRoute.Auth.INPUT_NICKNAME) {
-            InputNicknameScreen(
+            InputNickNameScreen(
                 onBackPressed = onBackPressed,
                 onNextClick = navigateToInputAge,
             )

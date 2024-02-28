@@ -8,9 +8,13 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.emoting.android.R
 import com.emoting.designsystem.ui.button.ButtonColor
 import com.emoting.designsystem.ui.button.EmotingButton
@@ -19,10 +23,23 @@ import com.emoting.designsystem.ui.theme.EmotingTypography
 import com.emoting.designsystem.ui.topbar.EmotingTopBar
 
 @Composable
-internal fun InputNicknameScreen(
+internal fun InputNickNameScreen(
     onBackPressed: () -> Unit,
     onNextClick: () -> Unit,
+    viewModel: InputNickNameViewModel = viewModel(),
 ) {
+    val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.sideEffect.collect {
+            when (it) {
+                is InputNickNameSideEffect.MoveToNext -> {
+                    onNextClick()
+                }
+            }
+        }
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         EmotingTopBar(
             onBackPressed = onBackPressed,
@@ -36,8 +53,8 @@ internal fun InputNicknameScreen(
         )
         Spacer(modifier = Modifier.height(44.dp))
         EmotingTextField(
-            value = "",
-            onValueChange = {},
+            value = state.nickName,
+            onValueChange = viewModel::setNickName,
             hint = stringResource(id = R.string.nickname),
         )
         Spacer(modifier = Modifier.weight(1f))
@@ -45,7 +62,8 @@ internal fun InputNicknameScreen(
             modifier = Modifier.imePadding(),
             text = stringResource(id = R.string.next),
             color = ButtonColor.Primary,
-            onClick = onNextClick,
+            onClick = viewModel::onNextClick,
+            enabled = state.buttonEnabled
         )
     }
 }
