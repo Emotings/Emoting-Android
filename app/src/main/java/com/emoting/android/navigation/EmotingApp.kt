@@ -26,10 +26,10 @@ internal fun EmotingApp() {
             navigateToLanding = { navController.navigate(NavigationRoute.Auth.LANDING) },
             navigateToSignIn = { navController.navigate(NavigationRoute.Auth.SIGN_IN) },
             navigateToInputEmail = { navController.navigate(NavigationRoute.Auth.INPUT_EMAIL) },
-            navigateToInputPassword = { navController.navigate(NavigationRoute.Auth.INPUT_PASSWORD) },
-            navigateToSetNickname = { navController.navigate(NavigationRoute.Auth.INPUT_NICKNAME) },
-            navigateToInputAge = { navController.navigate(NavigationRoute.Auth.INPUT_AGE) },
-            navigateToSetProfile = { navController.navigate(NavigationRoute.Auth.SET_PROFILE) },
+            navigateToInputPassword = { navController.navigate("${NavigationRoute.Auth.INPUT_PASSWORD}/${it.toJsonString()}") },
+            navigateToInputNickName = { navController.navigate("${NavigationRoute.Auth.INPUT_NICKNAME}/${it.toJsonString()}") },
+            navigateToInputAge = { navController.navigate("${NavigationRoute.Auth.INPUT_AGE}/${it.toJsonString()}") },
+            navigateToSetProfile = { navController.navigate("${NavigationRoute.Auth.SET_PROFILE}/${it.toJsonString()}") },
             navigateToRoot = {
                 navController.navigate(NavigationRoute.Main.ROOT) {
                     popUpTo(NavigationRoute.Auth.SIGN_IN)
