@@ -89,7 +89,7 @@ internal fun NavGraphBuilder.authNavigation(
         ) {
             SetProfileScreen(
                 onBackPressed = onBackPressed,
-                onNextClick = {},
+                navigateToLanding = navigateToLanding,
                 signUpData = it.getSignUpData(),
             )
         }

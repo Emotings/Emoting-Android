@@ -29,7 +29,7 @@ class InputPasswordViewModel :
     }
 
     internal fun onNextClick() {
-        val passwordValidate = state.value.password.length in 6..8
+        val passwordValidate = state.value.password.length in 6..18
         val repeatPasswordValidate = state.value.password == state.value.repeatPassword
 
         if (passwordValidate && repeatPasswordValidate) {

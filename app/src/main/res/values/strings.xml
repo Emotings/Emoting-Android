@@ -33,6 +33,8 @@
     <!--Set Profile Screen-->
     <string name="set_profile">프로필을 등록해주세요</string>
     <string name="later">나중에 하기</string>
+    <string name="success_sign_up">회원가입 되었습니다</string>
+    <string name="conflict_email">이미 존재하는 이메일 입니다</string>
 
     <!--Chats Screen-->
     <string name="chats">채팅 목록</string>
