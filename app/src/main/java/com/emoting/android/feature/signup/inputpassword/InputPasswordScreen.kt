@@ -9,9 +9,13 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.emoting.android.R
 import com.emoting.designsystem.ui.button.ButtonColor
 import com.emoting.designsystem.ui.button.EmotingButton
@@ -23,7 +27,20 @@ import com.emoting.designsystem.ui.topbar.EmotingTopBar
 internal fun InputPasswordScreen(
     onBackPressed: () -> Unit,
     onNextClick: () -> Unit,
+    viewModel: InputPasswordViewModel = viewModel(),
 ) {
+    val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.sideEffect.collect {
+            when (it) {
+                is InputPasswordSideEffect.MoveToNext -> {
+                    onNextClick()
+                }
+            }
+        }
+    }
+
     Column(modifier = Modifier.fillMaxSize()) {
         EmotingTopBar(
             onBackPressed = onBackPressed,
@@ -37,17 +54,20 @@ internal fun InputPasswordScreen(
         )
         Spacer(modifier = Modifier.height(44.dp))
         InputPasswordInputs(
-            password = "",
-            repeatPassword = "",
-            onPasswordChange = {},
-            onRepeatPasswordChange = {},
+            password = state.password,
+            repeatPassword = state.repeatPassword,
+            onPasswordChange = viewModel::setPassword,
+            onRepeatPasswordChange = viewModel::setRepeatPassword,
+            passwordErrorState = state.passwordErrorState,
+            repeatPasswordErrorState = state.repeatPasswordErrorState,
         )
         Spacer(modifier = Modifier.weight(1f))
         EmotingButton(
             modifier = Modifier.imePadding(),
             text = stringResource(id = R.string.next),
             color = ButtonColor.Primary,
-            onClick = onNextClick,
+            onClick = viewModel::onNextClick,
+            enabled = state.buttonEnabled,
         )
     }
 }
@@ -58,6 +78,8 @@ private fun InputPasswordInputs(
     repeatPassword: String,
     onPasswordChange: (String) -> Unit,
     onRepeatPasswordChange: (String) -> Unit,
+    passwordErrorState: Boolean,
+    repeatPasswordErrorState: Boolean,
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(54.dp)) {
         EmotingTextField(
@@ -65,12 +87,16 @@ private fun InputPasswordInputs(
             onValueChange = onPasswordChange,
             hint = stringResource(id = R.string.password),
             description = stringResource(id = R.string.description_password),
+            isError = passwordErrorState,
+            showVisibleIcon = true,
         )
         EmotingTextField(
             value = repeatPassword,
             onValueChange = onRepeatPasswordChange,
             hint = stringResource(id = R.string.re_enter_password),
             description = stringResource(id = R.string.description_re_enter_password),
+            isError = repeatPasswordErrorState,
+            showVisibleIcon = true,
         )
     }
 }
