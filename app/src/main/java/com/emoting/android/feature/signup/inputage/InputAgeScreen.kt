@@ -17,6 +17,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.emoting.android.R
+import com.emoting.android.feature.signup.SignUpData
 import com.emoting.designsystem.ui.button.ButtonColor
 import com.emoting.designsystem.ui.button.EmotingButton
 import com.emoting.designsystem.ui.textfield.EmotingTextField
@@ -26,7 +27,8 @@ import com.emoting.designsystem.ui.topbar.EmotingTopBar
 @Composable
 internal fun InputAgeScreen(
     onBackPressed: () -> Unit,
-    onNextClick: () -> Unit,
+    navigateToSetProfile: (SignUpData) -> Unit,
+    signUpData: SignUpData,
     viewModel: InputAgeViewModel = viewModel(),
 ) {
     val state by viewModel.state.collectAsState()
@@ -35,7 +37,7 @@ internal fun InputAgeScreen(
         viewModel.sideEffect.collect {
             when (it) {
                 is InputAgeSideEffect.MoveToNext -> {
-                    onNextClick()
+                    navigateToSetProfile(signUpData.copy(age = it.age.toInt()))
                 }
             }
         }

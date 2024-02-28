@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.emoting.android.R
+import com.emoting.android.feature.signup.SignUpData
 import com.emoting.designsystem.ui.button.ButtonColor
 import com.emoting.designsystem.ui.button.EmotingButton
 import com.emoting.designsystem.ui.theme.EmotingColors
@@ -39,6 +40,7 @@ import com.emoting.designsystem.utils.clickable
 internal fun SetProfileScreen(
     onBackPressed: () -> Unit,
     onNextClick: () -> Unit,
+    signUpData: SignUpData,
     viewModel: SetProfileViewModel = viewModel(),
 ) {
     val state by viewModel.state.collectAsState()
