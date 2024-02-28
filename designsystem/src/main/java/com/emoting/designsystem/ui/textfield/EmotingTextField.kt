@@ -110,7 +110,7 @@ private fun EmotingBasicUnderLineTextField(
     singleLine: Boolean,
     onValueChange: (String) -> Unit,
 ) {
-    var visible by remember { mutableStateOf(false) }
+    var visible by remember { mutableStateOf(!showVisibleIcon) }
     val offsetY by animateDpAsState(
         targetValue = if (value.isNotEmpty()) (-30).dp
         else 0.dp,
