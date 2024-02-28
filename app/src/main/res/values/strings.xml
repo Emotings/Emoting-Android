@@ -10,6 +10,10 @@
     <string name="password">비밀번호</string>
     <string name="sign_in">로그인</string>
 
+    <string name="sign_in_invalid_value">아이디와 비밀번호를 확인해주세요</string>
+    <string name="sign_in_not_found_user">존재하지 않는 이메일 이에요</string>
+    <string name="sign_in_invalid_password">비밀번호가 일치하지 않아요</string>
+
     <!--Input Email Screen-->
     <string name="sign_up">회원가입</string>
     <string name="next">다음</string>

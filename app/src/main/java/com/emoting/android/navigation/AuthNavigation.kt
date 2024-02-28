@@ -45,7 +45,7 @@ internal fun NavGraphBuilder.authNavigation(
             )
         }
         composable(NavigationRoute.Auth.SIGN_IN) {
-            SignInScreen(onSignInClick = navigateToRoot)
+            SignInScreen(navigateToMain = navigateToRoot)
         }
         composable(NavigationRoute.Auth.INPUT_EMAIL) {
             InputEmailScreen(
