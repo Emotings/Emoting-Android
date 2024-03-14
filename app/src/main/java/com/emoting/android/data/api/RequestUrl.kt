@@ -7,4 +7,9 @@ object RequestUrl {
         const val LOGIN = "$path/login"
         const val SIGN_UP = "$path/signup"
     }
+
+    object User {
+        private const val path = "/user"
+        const val FRIENDS = "$path/apply"
+    }
 }
