@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -31,7 +32,9 @@ import com.emoting.android.R
 import com.emoting.android.data.model.request.user.FetchFriendsResponse
 import com.emoting.android.data.util.RetrofitClient
 import com.emoting.android.ui.ChatContent
+import com.emoting.designsystem.ui.button.EmotingFloatingButton
 import com.emoting.designsystem.ui.button.EmotingIconButton
+import com.emoting.designsystem.ui.floatingbutton.EmotingFloatingActionButton
 import com.emoting.designsystem.ui.theme.EmotingColors
 import com.emoting.designsystem.ui.theme.EmotingTypography
 import com.emoting.designsystem.utils.clickable
@@ -76,21 +79,9 @@ internal fun FriendsScreen(
             Spacer(modifier = Modifier.height(20.dp))
             Friends(friends = state.friends)
         }
-        Box(
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .clickable(onClick = navigateToSearchFriend)
-                .padding(20.dp)
-                .shadow(
-                    elevation = 1.dp,
-                    shape = CircleShape,
-                )
-                .clip(CircleShape)
-                .background(EmotingColors.Primary500)
-                .padding(16.dp),
-            contentAlignment = Alignment.Center,
-        ) {
+        EmotingFloatingActionButton(onClick = navigateToSearchFriend) {
             Icon(
+                modifier = Modifier.size(24.dp),
                 painter = painterResource(id = R.drawable.ic_add_friend),
                 contentDescription = "add friend",
                 tint = EmotingColors.White,
