@@ -1,4 +1,4 @@
-package com.emoting.android.feature.freind
+package com.emoting.android.feature.freind.friends
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,8 +16,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,7 +26,10 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.emoting.android.R
+import com.emoting.android.data.model.request.user.FetchFriendsResponse
+import com.emoting.android.data.util.RetrofitClient
 import com.emoting.android.ui.ChatContent
 import com.emoting.designsystem.ui.button.EmotingIconButton
 import com.emoting.designsystem.ui.theme.EmotingColors
@@ -43,21 +46,9 @@ private data class Friend(
 internal fun FriendsScreen(
     navigateToFriendRequests: () -> Unit,
     navigateToSearchFriend: () -> Unit,
+    friendsViewModel: FriendsViewModel = viewModel(factory = FriendsViewModelFactory(userApi = RetrofitClient.getUserApi()))
 ) {
-    val friends = remember {
-        mutableStateListOf(
-            Friend(
-                profile = "",
-                name = "홍길동",
-                notification = false,
-            ),
-            Friend(
-                profile = "",
-                name = "홍길동",
-                notification = true,
-            ),
-        )
-    }
+    val state by friendsViewModel.state.collectAsState()
 
     Box {
         Column(
@@ -83,7 +74,7 @@ internal fun FriendsScreen(
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
-            Friends(friends = friends)
+            Friends(friends = state.friends)
         }
         Box(
             modifier = Modifier
@@ -110,14 +101,14 @@ internal fun FriendsScreen(
 
 @Composable
 private fun Friends(
-    friends: SnapshotStateList<Friend>,
+    friends: List<FetchFriendsResponse.Friend>,
 ) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(28.dp)) {
         items(friends) {
             ChatContent(
                 profile = it.profile,
-                name = it.name,
-                boolean = it.notification,
+                name = it.nickName,
+                boolean = it.isTurnOn,
                 trueMessage = stringResource(id = R.string.notification_on),
                 falseMessage = stringResource(id = R.string.notification_off),
                 onClick = {},

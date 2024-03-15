@@ -10,7 +10,7 @@ import androidx.navigation.compose.rememberNavController
 import com.emoting.android.NavigationRoute
 import com.emoting.android.feature.chat.ChatsScreen
 import com.emoting.android.feature.freind.FriendRequestsScreen
-import com.emoting.android.feature.freind.FriendsScreen
+import com.emoting.android.feature.freind.friends.FriendsScreen
 import com.emoting.android.feature.freind.SearchFriendScreen
 import com.emoting.android.navigation.BottomMenu
 import com.emoting.android.ui.BottomNavigationBar

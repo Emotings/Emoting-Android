@@ -28,7 +28,11 @@ import com.emoting.designsystem.ui.textfield.EmotingTextField
 @Composable
 internal fun SignInScreen(
     navigateToMain: () -> Unit,
-    viewModel: SignInViewModel = viewModel(factory = SignInViewModelFactory(RetrofitClient.getAuthApi())),
+    viewModel: SignInViewModel = viewModel(
+        factory = SignInViewModelFactory(
+            authApi = RetrofitClient.getAuthApi(),
+        ),
+    ),
 ) {
     val state by viewModel.state.collectAsState()
     val context = LocalContext.current

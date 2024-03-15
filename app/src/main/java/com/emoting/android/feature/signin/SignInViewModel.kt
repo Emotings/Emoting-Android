@@ -61,7 +61,7 @@ internal class SignInViewModel(
     }
 
     private fun saveAccessToken(accessToken: String) {
-        RetrofitClient.ACCESS_TOKEN = accessToken
+        RetrofitClient.ACCESS_TOKEN = "Bearer $accessToken"
     }
 
     private fun checkSignInValidation(): Boolean {
