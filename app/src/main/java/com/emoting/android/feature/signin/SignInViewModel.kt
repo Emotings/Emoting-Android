@@ -8,12 +8,14 @@ import com.emoting.android.data.model.response.PostSignInResponse
 import com.emoting.android.data.util.BadRequestException
 import com.emoting.android.data.util.NotFoundException
 import com.emoting.android.data.util.RequestHandler
+import com.emoting.android.data.util.RetrofitClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 internal class SignInViewModel(
     private val authApi: AuthApi,
 ) : BaseViewModel<SignInState, SignInSideEffect>(SignInState()) {
+
     internal fun setEmail(email: String) = setState {
         state.value.copy(
             email = email,
@@ -44,6 +46,7 @@ internal class SignInViewModel(
                         )
                     }
                 }.onSuccess {
+                    saveAccessToken(accessToken = it.accessToken)
                     postSideEffect(SignInSideEffect.Success)
                 }.onFailure {
                     setState {
@@ -55,6 +58,10 @@ internal class SignInViewModel(
                 }
             }
         }
+    }
+
+    private fun saveAccessToken(accessToken: String) {
+        RetrofitClient.ACCESS_TOKEN = accessToken
     }
 
     private fun checkSignInValidation(): Boolean {

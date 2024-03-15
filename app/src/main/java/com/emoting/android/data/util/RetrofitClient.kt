@@ -9,14 +9,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 internal object RetrofitClient {
-    private val tokenInterceptor = TokenInterceptor()
+
+    var ACCESS_TOKEN = ""
 
     private val httpLoggingInterceptor = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor)
-        .addInterceptor(tokenInterceptor)
         .build()
 
     private val gsonConverterFactory = GsonConverterFactory.create()
