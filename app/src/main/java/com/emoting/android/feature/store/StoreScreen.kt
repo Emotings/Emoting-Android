@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -19,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import com.emoting.android.R
 import com.emoting.android.component.StoreItem
 import com.emoting.designsystem.ui.button.EmotingIconButton
@@ -28,6 +31,17 @@ import com.emoting.designsystem.ui.theme.EmotingTypography
 
 @Composable
 internal fun StoreScreen() {
+    val (showFilterDialog, setShowFilterDialog) = remember { mutableStateOf(false) }
+
+    if (showFilterDialog) {
+        Dialog(onDismissRequest = { setShowFilterDialog(false) }) {
+            StoreFilterDialog(
+                onDismissRequest = { setShowFilterDialog(false) },
+                onSearchClick = { minPrice, maxPrice -> },
+            )
+        }
+    }
+
     Box {
         Column(
             modifier = Modifier
@@ -35,14 +49,14 @@ internal fun StoreScreen() {
                 .padding(horizontal = 20.dp),
         ) {
             Spacer(modifier = Modifier.height(12.dp))
-            StoreTopBar(onClick = {})
+            StoreTopBar(onClick = { setShowFilterDialog(true) })
             Spacer(modifier = Modifier.height(12.dp))
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = stringResource(id = R.string.point),
                     style = EmotingTypography.TextMedium,
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     text = "1,900",
                     style = EmotingTypography.TextMedium,
