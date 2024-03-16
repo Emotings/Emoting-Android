@@ -73,4 +73,10 @@
     <string name="point">보유 포인트</string>
     <string name="charge">충전하기</string>
     <string name="buy">구매</string>
+
+    <!--Store Filter-->
+    <string name="filter">필터</string>
+    <string name="max_price">최대 가격</string>
+    <string name="min_price">최소 가격</string>
+    <string name="search">조회</string>
 </resources>
