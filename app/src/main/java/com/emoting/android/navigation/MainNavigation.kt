@@ -9,14 +9,15 @@ import com.emoting.android.NavigationArguments
 import com.emoting.android.NavigationRoute
 import com.emoting.android.feature.chat.ChattingScreen
 import com.emoting.android.feature.chat.SearchChattingScreen
-import com.emoting.android.feature.freind.FriendRequestsScreen
 import com.emoting.android.feature.loading.LoadingScreen
+import com.emoting.android.feature.mypage.EditMyPageScreen
 import com.emoting.android.feature.root.RootScreen
 
 internal fun NavGraphBuilder.mainNavigation(
     onBackPressed: () -> Unit,
     navigateToChatting: (Long) -> Unit,
     navigateToSearchChatting: (Long) -> Unit,
+    navigateToEdit: () -> Unit,
 ) {
     navigation(
         route = NavigationRoute.Main.route,
@@ -25,6 +26,7 @@ internal fun NavGraphBuilder.mainNavigation(
         composable(NavigationRoute.Main.ROOT) {
             RootScreen(
                 navigateToChatting = navigateToChatting,
+                navigateToEdit = navigateToEdit,
             )
         }
         composable(NavigationRoute.Main.LOADING) {
@@ -44,6 +46,11 @@ internal fun NavGraphBuilder.mainNavigation(
         }
         composable(NavigationRoute.Main.CHATTING_SEARCH) {
             SearchChattingScreen()
+        }
+        composable(NavigationRoute.Main.EDIT_MY_PAGE) {
+            EditMyPageScreen(
+                onBackPressed = onBackPressed,
+            )
         }
     }
 }

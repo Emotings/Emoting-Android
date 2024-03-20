@@ -12,12 +12,14 @@ import com.emoting.android.feature.chat.ChatsScreen
 import com.emoting.android.feature.freind.FriendRequestsScreen
 import com.emoting.android.feature.freind.friends.FriendsScreen
 import com.emoting.android.feature.freind.SearchFriendScreen
+import com.emoting.android.feature.mypage.MyPageScreen
 import com.emoting.android.navigation.BottomMenu
 import com.emoting.android.ui.BottomNavigationBar
 
 @Composable
 fun RootScreen(
     navigateToChatting: (Long) -> Unit,
+    navigateToEdit: () -> Unit,
 ) {
     val navController = rememberNavController()
 
@@ -40,12 +42,15 @@ fun RootScreen(
 
             }
             composable(BottomMenu.MyPage.route) {
-
+                MyPageScreen(
+                    navigateToEdit = navigateToEdit,
+                )
             }
             composable(NavigationRoute.Root.FRIEND_REQUESTS) {
                 FriendRequestsScreen(
                     onBackPressed = navController::popBackStack,
-                    navigateToSearchFriend = { navController.navigate(NavigationRoute.Root.SEARCH_FRIEND) })
+                    navigateToSearchFriend = navigateToEdit,
+                )
             }
             composable(NavigationRoute.Root.SEARCH_FRIEND) {
                 SearchFriendScreen()

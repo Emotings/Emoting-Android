@@ -40,6 +40,7 @@ internal fun EmotingApp() {
             onBackPressed = navController::popBackStack,
             navigateToChatting = { navController.navigate("${NavigationRoute.Main.CHATTING}/$it") },
             navigateToSearchChatting = { navController.navigate(NavigationRoute.Main.CHATTING_SEARCH) },
+            navigateToEdit = { navController.navigate(NavigationRoute.Main.EDIT_MY_PAGE) },
         )
     }
 }
